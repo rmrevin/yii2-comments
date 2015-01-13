@@ -1,0 +1,15 @@
+.comment-title { margin-top: 20px; }
+.comments-list { }
+.comments-list .comment { margin-top: 20px; padding-top: 20px; border-top: 1px solid #DDDDDD; }
+.comments-list .comment.last { padding-bottom: 20px; border-bottom: 1px solid #DDDDDD; }
+.comments-list .comment .date { font-size: 0.8em; margin-left: 20px; }
+.comments-list .comment .author { }
+.comments-list .comment .author img.avatar { width: 25px; height: 25px; margin-right: 10px; }
+.comments-list .comment .author strong.name { }
+.comments-list .comment .text { margin-left: 35px; }
+.comments-list .comment .edit { margin-left: 35px; display: none; }
+.comments-list .comment .edit .actions { margin: 0; }
+.comments-list .comment .actions { margin: 10px 0 0 35px; }
+.comments-list .comment .actions > a { margin-right: 10px; padding: 0 10px; }
+.comments-list .comment .actions > a > i.fa { margin-right: 5px; }
+.comments-list .comment.deleted .text { font-style: italic; }

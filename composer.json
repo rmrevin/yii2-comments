@@ -1,0 +1,35 @@
+{
+  "name": "rmrevin/yii2-comments",
+  "description": "Comments module for Yii2",
+  "keywords": [
+    "yii",
+    "comment",
+    "widget",
+    "module"
+  ],
+  "type": "yii2-extension",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "support": {
+    "issues": "https://github.com/rmrevin/yii2-comments/issues",
+    "source": "https://github.com/rmrevin/yii2-comments"
+  },
+  "authors": [
+    {
+      "name": "Roman Revin",
+      "email": "xgismox@gmail.com",
+      "homepage": "http://rmrevin.ru/"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+
+    "yiisoft/yii2": "2.0.1",
+    "rmrevin/yii2-fontawesome": "2.6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "rmrevin\\yii\\module\\Comments\\": ""
+    }
+  }
+}
