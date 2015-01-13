@@ -18,7 +18,7 @@ Add in `composer.json`:
 ```
 {
     "require": {
-        "rmrevin/yii2-comments": "1.0.1"
+        "rmrevin/yii2-comments": "1.0.2"
     }
 }
 ```
@@ -43,17 +43,32 @@ use \rmrevin\yii\module\Comments\Permission;
 use \rmrevin\yii\module\Comments\rbac\ItsMyComment;
 
 $AuthManager = \Yii::$app->getAuthManager();
-$ItsMyCommentRule = new ItsMyComment();
+$ItsMyCommentRule = new \rmrevin\yii\module\Comments\rbac\ItsMyComment();
 
-// Rules
 $AuthManager->add($ItsMyCommentRule);
 
-// Permissions
-$AuthManager->add(new Role(['name' => Permission::CREATE]));
-$AuthManager->add(new Role(['name' => Permission::UPDATE]));
-$AuthManager->add(new Role(['name' => Permission::UPDATE_OWN, 'ruleName' => $ItsMyCommentRule->name]));
-$AuthManager->add(new Role(['name' => Permission::DELETE]));
-$AuthManager->add(new Role(['name' => Permission::DELETE_OWN, 'ruleName' => $ItsMyCommentRule->name]));
+$AuthManager->add(new \yii\rbac\Role([
+    'name' => Permission::CREATE,
+    'description' => 'Can create own comments',
+]));
+$AuthManager->add(new \yii\rbac\Role([
+    'name' => Permission::UPDATE,
+    'description' => 'Can update all comments',
+]));
+$AuthManager->add(new \yii\rbac\Role([
+    'name' => Permission::UPDATE_OWN,
+    'ruleName' => $ItsMyCommentRule->name,
+    'description' => 'Can update own comments',
+]));
+$AuthManager->add(new \yii\rbac\Role([
+    'name' => Permission::DELETE,
+    'description' => 'Can delete all comments',
+]));
+$AuthManager->add(new \yii\rbac\Role([
+    'name' => Permission::DELETE_OWN,
+    'ruleName' => $ItsMyCommentRule->name,
+    'description' => 'Can delete own comments',
+]));
 ```
 
 Usage
