@@ -4,7 +4,8 @@
 .comments-list .comment.last { padding-bottom: 20px; border-bottom: 1px solid #DDDDDD; }
 .comments-list .comment .date { font-size: 0.8em; margin-left: 20px; }
 .comments-list .comment .author { }
-.comments-list .comment .author img.avatar { width: 25px; height: 25px; margin-right: 10px; }
+.comments-list .comment .author .avatar { width: 25px; height: 25px; margin-right: 10px; }
+.comments-list .comment .author .avatar.fake { float: left; text-align: center; background-color: #DDDDDD; font-size: 19px; }
 .comments-list .comment .author strong.name { }
 .comments-list .comment .text { margin-left: 35px; }
 .comments-list .comment .edit { margin-left: 35px; display: none; }
