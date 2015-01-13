@@ -6,17 +6,21 @@
 
 namespace rmrevin\yii\module\Comments\tests\unit\comments;
 
-use rmrevin\yii\module\Comments\tests\unit\TestCase;
+use rmrevin\yii\module\Comments;
 
 /**
  * Class MainTest
  * @package rmrevin\yii\fontawesome\tests\unit\fontawesome
  */
-class MainTest extends TestCase
+class MainTest extends Comments\tests\unit\TestCase
 {
 
     public function testMain()
     {
-        $this->assertInstanceOf('rmrevin\yii\module\Comments\Module', \Yii::$app->getModule('comments'));
+        /** @var Comments\Module $Module */
+        $Module = \Yii::$app->getModule('comments');
+
+        $this->assertInstanceOf('rmrevin\yii\module\Comments\Module', $Module);
+        $this->assertEquals('rmrevin\yii\module\Comments\tests\unit\models\User', $Module->userIdentityClass);
     }
 }
