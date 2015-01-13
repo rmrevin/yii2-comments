@@ -24,7 +24,7 @@ class CommentListAsset extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        \yii\web\YiiAsset::class,
-        \yii\web\JqueryAsset::class,
+        '\yii\web\YiiAsset',
+        '\yii\web\JqueryAsset',
     ];
 }
