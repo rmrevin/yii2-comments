@@ -55,7 +55,7 @@ echo yii\widgets\ListView::widget([
             <div <?= Html::renderTagAttributes($options) ?>>
                 <div class="col-lg-12">
                     <div class="author">
-                        <?
+                        <?php
                         $avatar = false;
                         $name = Yii::t('app', 'Unknown author');
                         $url = false;
@@ -98,7 +98,7 @@ echo yii\widgets\ListView::widget([
                         ?>
                     </div>
                     <div class="text">
-                        <?
+                        <?php
                         if ($Comment->isDeleted()) {
                             echo Yii::t('app', 'Comment was deleted.');
                         } else {
@@ -114,22 +114,22 @@ echo yii\widgets\ListView::widget([
                         }
                         ?>
                     </div>
-                    <?
+                    <?php
                     if ($Comment->canUpdate() && !$Comment->isDeleted()) {
                         ?>
                         <div class="edit">
-                            <?
+                            <?php
                             echo Comments\widgets\CommentFormWidget::widget([
                                 'entity' => $CommentListWidget->entity,
                                 'Comment' => $Comment,
                             ]);
                             ?>
                         </div>
-                    <?
+                    <?php
                     }
                     ?>
                     <div class="actions">
-                        <?
+                        <?php
                         if (!$Comment->isDeleted()) {
                             echo Html::a(FA::icon('reply') . ' ' . Yii::t('app', 'Reply'), '#', [
                                 'class' => 'btn btn-info btn-xs',
@@ -159,7 +159,7 @@ echo yii\widgets\ListView::widget([
                     </div>
                 </div>
             </div>
-            <?
+            <?php
 
             return ob_get_clean();
         }
