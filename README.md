@@ -25,7 +25,7 @@ Add in `composer.json`:
 
 In config `/protected/config/main.php`
 ```php
-<?
+<?php
 return [
 	// ...
 	'modules' => [
@@ -75,7 +75,7 @@ Usage
 -----
 In view
 ```php
-<?
+<?php
 // ...
 
 echo \rmrevin\yii\module\Comments\widgets\CommentListWidget::widget([

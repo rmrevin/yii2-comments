@@ -18,7 +18,7 @@ $Widget = $this->context;
 <a name="commentcreateform"></a>
 <div class="row comment-form">
     <div class="col-xs-12 col-sm-9 col-md-6 col-lg-4">
-        <?
+        <?php
         /** @var \yii\widgets\ActiveForm $form */
         $form = \yii\widgets\ActiveForm::begin();
 
@@ -33,7 +33,7 @@ $Widget = $this->context;
 
         ?>
         <div class="actions">
-            <?
+            <?php
             echo Html::submitButton(\Yii::t('app', 'Post comment'), [
                 'class' => 'btn btn-primary',
             ]);
@@ -42,7 +42,7 @@ $Widget = $this->context;
             ]);
             ?>
         </div>
-        <?
+        <?php
         \yii\widgets\ActiveForm::end();
         ?>
     </div>
