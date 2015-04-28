@@ -110,7 +110,7 @@ class Comment extends \yii\db\ActiveRecord
 
         return $Module->useRbac === true
             ? \Yii::$app->getUser()->can(Comments\Permission::UPDATE) || \Yii::$app->getUser()->can(Comments\Permission::UPDATE_OWN, ['Comment' => $this])
-            : true;
+            : $this->created_by === \Yii::$app->get('user')->id;
     }
 
     /**
@@ -123,7 +123,7 @@ class Comment extends \yii\db\ActiveRecord
 
         return $Module->useRbac === true
             ? \Yii::$app->getUser()->can(Comments\Permission::DELETE) || \Yii::$app->getUser()->can(Comments\Permission::DELETE_OWN, ['Comment' => $this])
-            : true;
+            : $this->created_by === \Yii::$app->get('user')->id;
     }
 
     /**
