@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "451a48edc804f8982483ad253d3d6cc3",
+    "hash": "eadc107bddbbefcd6004ad15fb9a6a14",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -51,16 +51,16 @@
         },
         {
             "name": "bower-asset/jquery.inputmask",
-            "version": "3.1.61",
+            "version": "3.1.62",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-                "reference": "f2c086411d2557fc485c47afb3cecfa6c1de9ee2"
+                "reference": "da1a274cefa18a52a0519ac7ffe8e8d31e950eae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/f2c086411d2557fc485c47afb3cecfa6c1de9ee2",
-                "reference": "f2c086411d2557fc485c47afb3cecfa6c1de9ee2",
+                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/da1a274cefa18a52a0519ac7ffe8e8d31e950eae",
+                "reference": "da1a274cefa18a52a0519ac7ffe8e8d31e950eae",
                 "shasum": ""
             },
             "require": {
@@ -316,16 +316,16 @@
         },
         {
             "name": "rmrevin/yii2-fontawesome",
-            "version": "2.8.2",
+            "version": "2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rmrevin/yii2-fontawesome.git",
-                "reference": "a1ff85ce3387f033ef60c801f06192e07e52829c"
+                "reference": "459c2337d1941be5bc10d94863661c8bb23cc3b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/a1ff85ce3387f033ef60c801f06192e07e52829c",
-                "reference": "a1ff85ce3387f033ef60c801f06192e07e52829c",
+                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/459c2337d1941be5bc10d94863661c8bb23cc3b7",
+                "reference": "459c2337d1941be5bc10d94863661c8bb23cc3b7",
                 "shasum": ""
             },
             "require": {
@@ -358,7 +358,7 @@
                 "font",
                 "yii"
             ],
-            "time": "2015-03-17 19:09:09"
+            "time": "2015-04-08 07:39:18"
         },
         {
             "name": "yiisoft/yii2",
