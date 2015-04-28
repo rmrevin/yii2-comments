@@ -18,7 +18,7 @@ Add in `composer.json`:
 ```
 {
     "require": {
-        "rmrevin/yii2-comments": "1.0.6"
+        "rmrevin/yii2-comments": "1.0.10"
     }
 }
 ```
