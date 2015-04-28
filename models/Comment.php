@@ -92,7 +92,12 @@ class Comment extends \yii\db\ActiveRecord
      */
     public static function canCreate()
     {
-        return true || \Yii::$app->getUser()->can(Comments\Permission::CREATE);
+        /** @var Comments\Module $Module */
+        $Module = \Yii::$app->getModule(Comments\Module::NAME);
+
+        return $Module->useRbac === true
+            ? \Yii::$app->getUser()->can(Comments\Permission::CREATE)
+            : true;
     }
 
     /**
@@ -100,7 +105,12 @@ class Comment extends \yii\db\ActiveRecord
      */
     public function canUpdate()
     {
-        return true || \Yii::$app->getUser()->can(Comments\Permission::UPDATE) || \Yii::$app->getUser()->can(Comments\Permission::UPDATE_OWN, ['Comment' => $this]);
+        /** @var Comments\Module $Module */
+        $Module = \Yii::$app->getModule(Comments\Module::NAME);
+
+        return $Module->useRbac === true
+            ? \Yii::$app->getUser()->can(Comments\Permission::UPDATE) || \Yii::$app->getUser()->can(Comments\Permission::UPDATE_OWN, ['Comment' => $this])
+            : true;
     }
 
     /**
@@ -108,7 +118,12 @@ class Comment extends \yii\db\ActiveRecord
      */
     public function canDelete()
     {
-        return true || \Yii::$app->getUser()->can(Comments\Permission::DELETE) || \Yii::$app->getUser()->can(Comments\Permission::DELETE_OWN, ['Comment' => $this]);
+        /** @var Comments\Module $Module */
+        $Module = \Yii::$app->getModule(Comments\Module::NAME);
+
+        return $Module->useRbac === true
+            ? \Yii::$app->getUser()->can(Comments\Permission::DELETE) || \Yii::$app->getUser()->can(Comments\Permission::DELETE_OWN, ['Comment' => $this])
+            : true;
     }
 
     /**
@@ -117,7 +132,7 @@ class Comment extends \yii\db\ActiveRecord
     public function getAuthor()
     {
         /** @var Comments\Module $Module */
-        $Module = \Yii::$app->getModule('comments');
+        $Module = \Yii::$app->getModule(Comments\Module::NAME);
 
         return $this->hasOne($Module->userIdentityClass, ['id' => 'created_by']);
     }
@@ -128,7 +143,7 @@ class Comment extends \yii\db\ActiveRecord
     public function getLastUpdateAuthor()
     {
         /** @var Comments\Module $Module */
-        $Module = \Yii::$app->getModule('comments');
+        $Module = \Yii::$app->getModule(Comments\Module::NAME);
 
         return $this->hasOne($Module->userIdentityClass, ['id' => 'updated_by']);
     }

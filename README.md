@@ -18,7 +18,7 @@ Add in `composer.json`:
 ```
 {
     "require": {
-        "rmrevin/yii2-comments": "1.0.10"
+        "rmrevin/yii2-comments": "1.1.0"
     }
 }
 ```
@@ -30,20 +30,24 @@ return [
 	// ...
 	'modules' => [
 		// ...
-		'comments' => 'rmrevin\yii\module\Comments\Module',
+		'comments' => [
+		    'class' => 'rmrevin\yii\module\Comments\Module',
+		    'userIdentityClass' => 'app\models\User'
+		    'useRbac' => true,
+		]
 	],
 	// ...
 ];
 ```
 
-In auth manager add rules:
+In auth manager add rules (if `Module::$useRbac = true`):
 ```php
 use \yii\rbac\Role;
 use \rmrevin\yii\module\Comments\Permission;
 use \rmrevin\yii\module\Comments\rbac\ItsMyComment;
 
 $AuthManager = \Yii::$app->getAuthManager();
-$ItsMyCommentRule = new \rmrevin\yii\module\Comments\rbac\ItsMyComment();
+$ItsMyCommentRule = new ItsMyComment();
 
 $AuthManager->add($ItsMyCommentRule);
 
@@ -78,7 +82,9 @@ In view
 <?php
 // ...
 
-echo \rmrevin\yii\module\Comments\widgets\CommentListWidget::widget([
+use rmrevin\yii\module\Comments;
+
+echo Comments\widgets\CommentListWidget::widget([
     'entity' => (string) 'photo-15', // type and id
 ]);
 

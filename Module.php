@@ -13,8 +13,13 @@ namespace rmrevin\yii\module\Comments;
 class Module extends \yii\base\Module
 {
 
+    const NAME = 'comments';
+
     /** @var string|null */
     public $userIdentityClass = null;
+
+    /** @var bool */
+    public $useRbac = true;
 
     public function init()
     {
