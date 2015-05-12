@@ -42,7 +42,7 @@ class CommentCreateForm extends \yii\base\Model
             [['entity', 'text'], 'required'],
             [['entity', 'text'], 'string'],
             [['id'], 'integer'],
-            [['id'], 'exist', 'targetClass' => Comments\models\Comment::class, 'targetAttribute' => 'id'],
+            [['id'], 'exist', 'targetClass' => Comments\models\Comment::className(), 'targetAttribute' => 'id'],
         ];
     }
 

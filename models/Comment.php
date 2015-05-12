@@ -36,8 +36,8 @@ class Comment extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            \yii\behaviors\BlameableBehavior::class,
-            \yii\behaviors\TimestampBehavior::class,
+            \yii\behaviors\BlameableBehavior::className(),
+            \yii\behaviors\TimestampBehavior::className(),
         ];
     }
 
