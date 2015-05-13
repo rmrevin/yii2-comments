@@ -75,6 +75,15 @@ $AuthManager->add(new \yii\rbac\Role([
 ]));
 ```
 
+Updating database schema
+-------------
+After you downloaded and configured yii2-comments, the last thing you need to do is updating your database schema by applying the migrations:
+
+In `Command line`:
+```
+php yii migrate/up --migrationPath=@vendor/rmrevin/yii2-comments/migrations/
+```
+
 Usage
 -----
 In view
