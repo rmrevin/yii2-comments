@@ -1,5 +1,5 @@
 Yii 2 Comments Module
-===============================
+=====================
 [![License](https://poser.pugx.org/rmrevin/yii2-comments/license.svg)](https://packagist.org/packages/rmrevin/yii2-comments)
 [![Latest Stable Version](https://poser.pugx.org/rmrevin/yii2-comments/v/stable.svg)](https://packagist.org/packages/rmrevin/yii2-comments)
 [![Latest Unstable Version](https://poser.pugx.org/rmrevin/yii2-comments/v/unstable.svg)](https://packagist.org/packages/rmrevin/yii2-comments)
@@ -14,14 +14,12 @@ Code Status
 
 Installation
 ------------
-Add in `composer.json`:
+```bash
+composer require "rmrevin/yii2-comments:1.2.*"
 ```
-{
-    "require": {
-        "rmrevin/yii2-comments": "1.2.0"
-    }
-}
-```
+
+Configuration
+-------------
 
 In config `/protected/config/main.php`
 ```php
@@ -42,7 +40,7 @@ return [
 
 In auth manager add rules (if `Module::$useRbac = true`):
 ```php
-use \yii\rbac\Role;
+<?php
 use \rmrevin\yii\module\Comments\Permission;
 use \rmrevin\yii\module\Comments\rbac\ItsMyComment;
 
@@ -76,10 +74,11 @@ $AuthManager->add(new \yii\rbac\Role([
 ```
 
 Updating database schema
--------------
-After you downloaded and configured yii2-comments, the last thing you need to do is updating your database schema by applying the migrations:
+------------------------
+After you downloaded and configured `rmrevin/yii2-comments`,
+the last thing you need to do is updating your database schema by applying the migrations:
 
-In `Command line`:
+In `command line`:
 ```
 php yii migrate/up --migrationPath=@vendor/rmrevin/yii2-comments/migrations/
 ```

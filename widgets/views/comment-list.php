@@ -1,7 +1,8 @@
 <?php
 /**
  * comment-list.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
+ * @link https://rmrevin.ru
  *
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $CommentsDataProvider

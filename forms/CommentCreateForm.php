@@ -1,7 +1,8 @@
 <?php
 /**
  * CommentCreateForm.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
+ * @link https://rmrevin.ru
  */
 
 namespace rmrevin\yii\module\Comments\forms;
