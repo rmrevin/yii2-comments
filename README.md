@@ -30,7 +30,7 @@ return [
 		// ...
 		'comments' => [
 		    'class' => 'rmrevin\yii\module\Comments\Module',
-		    'userIdentityClass' => 'app\models\User'
+		    'userIdentityClass' => 'app\models\User',
 		    'useRbac' => true,
 		]
 	],
