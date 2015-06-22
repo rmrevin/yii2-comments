@@ -133,10 +133,12 @@ echo yii\widgets\ListView::widget([
                     <div class="actions">
                         <?php
                         if (!$Comment->isDeleted()) {
-                            echo Html::a(FA::icon('reply') . ' ' . Yii::t('app', 'Reply'), '#', [
-                                'class' => 'btn btn-info btn-xs',
-                                'data-role' => 'reply',
-                            ]);
+                            if ($Comment->canCreate()) {
+                                echo Html::a(FA::icon('reply') . ' ' . Yii::t('app', 'Reply'), '#', [
+                                    'class' => 'btn btn-info btn-xs',
+                                    'data-role' => 'reply',
+                                ]);
+                            }
 
                             if ($Comment->canUpdate()) {
                                 echo Html::a(
