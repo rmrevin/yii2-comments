@@ -123,6 +123,7 @@ echo yii\widgets\ListView::widget([
                             echo Comments\widgets\CommentFormWidget::widget([
                                 'entity' => $CommentListWidget->entity,
                                 'Comment' => $Comment,
+                                'anchor' => $CommentListWidget->anchorAfterUpdate,
                             ]);
                             ?>
                         </div>
@@ -172,6 +173,7 @@ if ($CommentListWidget->showCreateForm && Comments\models\Comment::canCreate()) 
     echo Comments\widgets\CommentFormWidget::widget([
         'entity' => $CommentListWidget->entity,
         'Comment' => new Comments\models\Comment(),
+        'anchor' => $CommentListWidget->anchorAfterUpdate,
     ]);
 }
 

@@ -22,6 +22,9 @@ class CommentFormWidget extends \yii\base\Widget
     /** @var Comments\models\Comment */
     public $Comment;
 
+    /** @var string */
+    public $anchor = '#comment-%d';
+
     /**
      * @inheritdoc
      */
@@ -38,7 +41,7 @@ class CommentFormWidget extends \yii\base\Widget
             if ($CommentCreateForm->validate()) {
                 if ($CommentCreateForm->save()) {
                     \Yii::$app->getResponse()
-                        ->refresh('#comment-' . $CommentCreateForm->Comment->id)
+                        ->refresh(sprintf($this->anchor, $CommentCreateForm->Comment->id))
                         ->send();
 
                     exit;
