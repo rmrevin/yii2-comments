@@ -16,6 +16,9 @@ use rmrevin\yii\module\Comments;
 class CommentFormWidget extends \yii\base\Widget
 {
 
+    /** @var string|null */
+    public $theme;
+
     /** @var string */
     public $entity;
 
@@ -52,5 +55,17 @@ class CommentFormWidget extends \yii\base\Widget
         return $this->render('comment-form', [
             'CommentCreateForm' => $CommentCreateForm,
         ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getViewPath()
+    {
+        if (empty($this->theme)) {
+            return parent::getViewPath();
+        } else {
+            return \Yii::$app->getViewPath() . DIRECTORY_SEPARATOR . $this->theme;
+        }
     }
 }
