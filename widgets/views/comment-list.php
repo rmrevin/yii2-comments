@@ -173,6 +173,7 @@ if ($CommentListWidget->showCreateForm && Comments\models\Comment::canCreate()) 
     echo Html::tag('h3', Yii::t('app', 'Add comment'), ['class' => 'comment-title']);
 
     echo Comments\widgets\CommentFormWidget::widget([
+        'theme' => $CommentListWidget->theme,
         'entity' => $CommentListWidget->entity,
         'Comment' => new Comments\models\Comment(),
         'anchor' => $CommentListWidget->anchorAfterUpdate,
