@@ -49,24 +49,24 @@ $ItsMyCommentRule = new ItsMyComment();
 
 $AuthManager->add($ItsMyCommentRule);
 
-$AuthManager->add(new \yii\rbac\Role([
+$AuthManager->add(new \yii\rbac\Permission([
     'name' => Permission::CREATE,
     'description' => 'Can create own comments',
 ]));
-$AuthManager->add(new \yii\rbac\Role([
+$AuthManager->add(new \yii\rbac\Permission([
     'name' => Permission::UPDATE,
     'description' => 'Can update all comments',
 ]));
-$AuthManager->add(new \yii\rbac\Role([
+$AuthManager->add(new \yii\rbac\Permission([
     'name' => Permission::UPDATE_OWN,
     'ruleName' => $ItsMyCommentRule->name,
     'description' => 'Can update own comments',
 ]));
-$AuthManager->add(new \yii\rbac\Role([
+$AuthManager->add(new \yii\rbac\Permission([
     'name' => Permission::DELETE,
     'description' => 'Can delete all comments',
 ]));
-$AuthManager->add(new \yii\rbac\Role([
+$AuthManager->add(new \yii\rbac\Permission([
     'name' => Permission::DELETE_OWN,
     'ruleName' => $ItsMyCommentRule->name,
     'description' => 'Can delete own comments',
