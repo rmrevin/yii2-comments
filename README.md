@@ -97,3 +97,24 @@ echo Comments\widgets\CommentListWidget::widget([
 ]);
 
 ```
+
+
+Extending the package
+---------------------
+You can extend the view files supplied by this package using the `theme` component in the config file.
+
+```php
+// app/config/web.php
+
+'components' => [
+    'view' => [
+        'theme' => [
+            'pathMap' => [
+                '@vendor/rmrevin/yii2-comments/widgets/views' => '@app/views/comments', // example: @app/views/comment/comment-form.php
+            ],
+        ],
+    ],
+],
+
+```
+
