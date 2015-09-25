@@ -140,6 +140,10 @@ Default data:
         ],
 ```
 
+* **showDeleted** (optional, boolean) Default `True`. Defines if the comments panel will show a message indicating the deleted comments.
+
+* **showCreateForm** (optional, boolean) Default `True`. Will show or hide the form to add a comment in this panel.
+
 
 Extending the package
 ---------------------
