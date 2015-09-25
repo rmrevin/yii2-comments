@@ -49,24 +49,24 @@ $ItsMyCommentRule = new ItsMyComment();
 
 $AuthManager->add($ItsMyCommentRule);
 
-$AuthManager->add(new \yii\rbac\Permission([
+$AuthManager->add(new \yii\rbac\Role([
     'name' => Permission::CREATE,
     'description' => 'Can create own comments',
 ]));
-$AuthManager->add(new \yii\rbac\Permission([
+$AuthManager->add(new \yii\rbac\Role([
     'name' => Permission::UPDATE,
     'description' => 'Can update all comments',
 ]));
-$AuthManager->add(new \yii\rbac\Permission([
+$AuthManager->add(new \yii\rbac\Role([
     'name' => Permission::UPDATE_OWN,
     'ruleName' => $ItsMyCommentRule->name,
     'description' => 'Can update own comments',
 ]));
-$AuthManager->add(new \yii\rbac\Permission([
+$AuthManager->add(new \yii\rbac\Role([
     'name' => Permission::DELETE,
     'description' => 'Can delete all comments',
 ]));
-$AuthManager->add(new \yii\rbac\Permission([
+$AuthManager->add(new \yii\rbac\Role([
     'name' => Permission::DELETE_OWN,
     'ruleName' => $ItsMyCommentRule->name,
     'description' => 'Can delete own comments',
@@ -98,9 +98,75 @@ echo Comments\widgets\CommentListWidget::widget([
 
 ```
 
+Parameters
+----------
+
+### Module parameters
+
+* **userIdentityClass** (required, string) The user identity class that Yii2 uses to provide identity information about the users in the App.
+
+* **useRbac** (optional, boolean) Default TRUE. Defines if the comment system will use Rbac validation to check the comment permissions when trying to update, delete or add new comments.
+
+* **modelClasses** (optional, string[]) Stores the user defined model classes that will be used instead of the default ones in the comment system. Must have a key => classname format. e.g. `'Comment' => '@app\comments\CommentModel'`
+
+
+### Widget parameters
+
+* **entity** (required, string) The entity that will identify the comments under on section from all the comments in this module.
+
+* **theme** (optional, string) In case you want to use a theme in your application you should define here it's location.
+
+* **viewParams** (optional, array) Data that will be sent directly into the widget view files. Must have a key => data format. The key will be the variable name in the view. The variable `CommentsDataProvider` it's already taken.
+
+* **options** (optional, array) Default `['class' => 'comments-widget']`. Option data array that will be sent into the div holding the comment system in your views.
+
+* **pagination** (optional, array) Pagination configuration that will be used in the comment panel.
+Default data:
+```php
+public $pagination = 
+    [
+        'pageParam' => 'page',
+        'pageSizeParam' => 'per-page',
+        'pageSize' => 20,
+        'pageSizeLimit' => [1, 50],
+    ];
+```
+
+* **sort** (optional, array) Type of sorting used to retrieve the comments into the panel. Can be sorted by any of the columns defined in the `comment` table.
+Default data:
+```php
+        'defaultOrder' => [
+            'id' => SORT_ASC,
+        ],
+```
+
 
 Extending the package
 ---------------------
+
+### Extending Model files
+
+Depending on which ones you need, you can set the `modelClasses` config property:
+
+```php
+
+	// ...
+	'modules' => [
+		// ...
+		'comments' => [
+		    'class' => 'rmrevin\yii\module\Comments\Module',
+		    'userIdentityClass' => 'app\models\User',
+		    'useRbac' => true,
+		    'modelClasses' => [
+		        'Comment' => '@app\comments\CommentModel'
+		    ]
+		]
+	],
+	// ...
+```
+
+### Extending View files
+
 You can extend the view files supplied by this package using the `theme` component in the config file.
 
 ```php
@@ -118,3 +184,6 @@ You can extend the view files supplied by this package using the `theme` compone
 
 ```
 
+### Extending Widgets
+
+To extend the widget code and behavior you only have to extend the widget classes and call them instead of the package's ones.
