@@ -169,6 +169,8 @@ Depending on which ones you need, you can set the `modelClasses` config property
 	// ...
 ```
 
+Attention: keep in mind that if you are changing the `Comment` model, the new class should always extend the package's original `Comment` class.
+
 ### Extending View files
 
 You can extend the view files supplied by this package using the `theme` component in the config file.
