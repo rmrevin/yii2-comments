@@ -36,7 +36,7 @@ class Module extends \yii\base\Module
      *
      * @var array
      */
-    protected $modelClasses = [];
+    public $modelClasses = [];
     
     public function init()
     {
