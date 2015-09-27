@@ -22,10 +22,10 @@ class Module extends \yii\base\Module
     const NAME = 'comments';
 
     /** @var string|null */
-    public $userIdentityClass = NULL;
+    public $userIdentityClass = null;
 
     /** @var bool */
-    public $useRbac = TRUE;
+    public $useRbac = true;
 
     /**
      * Array that will store the models used in the package
@@ -42,7 +42,7 @@ class Module extends \yii\base\Module
     {
         parent::init();
 
-        if ($this->userIdentityClass === NULL)
+        if ($this->userIdentityClass === null)
         {
             $this->userIdentityClass = \Yii::$app->getUser()->identityClass;
         }
