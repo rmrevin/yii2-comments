@@ -39,11 +39,13 @@ class CommentCreateForm extends \yii\base\Model
      */
     public function rules()
     {
+        $CommentModelClassName =  \Yii::$app->getModule(Comments\Module::NAME)->model('comment');
+
         return [
             [['entity', 'text'], 'required'],
             [['entity', 'text'], 'string'],
             [['id'], 'integer'],
-            [['id'], 'exist', 'targetClass' => Comments\models\Comment::className(), 'targetAttribute' => 'id'],
+            [['id'], 'exist', 'targetClass' => $CommentModelClassName, 'targetAttribute' => 'id'],
         ];
     }
 
@@ -66,10 +68,14 @@ class CommentCreateForm extends \yii\base\Model
     {
         $Comment = $this->Comment;
 
+        $CommentModelClassName =  \Yii::$app->getModule(Comments\Module::NAME)->model('comment');
+
         if (empty($this->id)) {
-            $Comment = new Comments\models\Comment();
+            $Comment =  \Yii::createObject($CommentModelClassName);
         } elseif ($this->id > 0 && $Comment->id !== $this->id) {
-            $Comment = Comments\models\Comment::find()
+            /** @var Comments\models\Comment $CommentModel */
+            $CommentModel =  \Yii::createObject($CommentModelClassName);
+            $Comment = $CommentModel::find()
                 ->byId($this->id)
                 ->one();
 

@@ -154,7 +154,8 @@ class Comment extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new queries\CommentQuery(get_called_class());
+        $CommentQueryModelClassName =  \Yii::$app->getModule(Comments\Module::NAME)->model('commentQuery');
+        return  \Yii::createObject($CommentQueryModelClassName, [get_called_class()]);
     }
 
     /**

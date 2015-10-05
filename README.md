@@ -98,9 +98,110 @@ echo Comments\widgets\CommentListWidget::widget([
 
 ```
 
+Parameters
+----------
+
+### Module parameters
+
+* **userIdentityClass** (required, string) The user identity class that Yii2 uses to provide identity information about the users in the App.
+
+* **useRbac** (optional, boolean) Default TRUE. Defines if the comment system will use Rbac validation to check the comment permissions when trying to update, delete or add new comments.
+
+* **modelClasses** (optional, string[]) Stores the user defined model classes that will be used instead of the default ones in the comment system. Must have a key => classname format. e.g. `'Comment' => '@app\comments\CommentModel'`
+
+
+### Widget parameters
+
+* **entity** (required, string) The entity that will identify the comments under on section from all the comments in this module.
+
+* **theme** (optional, string) In case you want to use a theme in your application you should define here it's location.
+
+* **viewParams** (optional, array) Data that will be sent directly into the widget view files. Must have a key => data format. The key will be the variable name in the view. The variable `CommentsDataProvider` it's already taken.
+
+* **options** (optional, array) Default `['class' => 'comments-widget']`. Option data array that will be sent into the div holding the comment system in your views.
+
+* **pagination** (optional, array) Pagination configuration that will be used in the comment panel.
+Default data:
+```php
+public $pagination = 
+    [
+        'pageParam' => 'page',
+        'pageSizeParam' => 'per-page',
+        'pageSize' => 20,
+        'pageSizeLimit' => [1, 50],
+    ];
+```
+
+* **sort** (optional, array) Type of sorting used to retrieve the comments into the panel. Can be sorted by any of the columns defined in the `comment` table.
+Default data:
+```php
+        'defaultOrder' => [
+            'id' => SORT_ASC,
+        ],
+```
+
+* **showDeleted** (optional, boolean) Default `True`. Defines if the comments panel will show a message indicating the deleted comments.
+
+* **showCreateForm** (optional, boolean) Default `True`. Will show or hide the form to add a comment in this panel.
+
 
 Extending the package
 ---------------------
+
+### Extending Model files
+
+Depending on which ones you need, you can set the `modelMap` config property:
+
+```php
+
+	// ...
+	'modules' => [
+		// ...
+		'comments' => [
+		    'class' => 'rmrevin\yii\module\Comments\Module',
+		    'userIdentityClass' => 'app\models\User',
+		    'useRbac' => true,
+		    'modelMap' => [
+		        'Comment' => '@app\comments\CommentModel'
+		    ]
+		]
+	],
+	// ...
+```
+
+
+Attention: keep in mind that if you are changing the `Comment` model, the new class should always extend the package's original `Comment` class.
+
+
+### Attaching behaviors and event handlers
+ 
+The package allows you to attach behavior or event handler to any model. To do this you can set model map like so:
+
+```php
+
+	// ...
+	'modules' => [
+		// ...
+		'comments' => [
+		    'class' => 'rmrevin\yii\module\Comments\Module',
+		    'userIdentityClass' => 'app\models\User',
+		    'useRbac' => true,
+		    'modelMap' => [
+		        'Comment' => [
+		            'class' => '@app\comments\CommentModel',
+		            'on event' => function(){
+		                // code here
+		            },
+		            'as behavior' => 
+		                ['class' => 'Foo'],
+		    ]
+		]
+	],
+	// ...
+```
+
+### Extending View files
+
 You can extend the view files supplied by this package using the `theme` component in the config file.
 
 ```php
@@ -118,3 +219,6 @@ You can extend the view files supplied by this package using the `theme` compone
 
 ```
 
+### Extending Widgets
+
+To extend the widget code and behavior you only have to extend the widget classes and call them instead of the package's ones.

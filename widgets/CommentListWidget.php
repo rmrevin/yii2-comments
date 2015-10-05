@@ -70,7 +70,11 @@ class CommentListWidget extends \yii\base\Widget
 
         $this->processDelete();
 
-        $CommentsQuery = Comments\models\Comment::find()
+
+        $CommentModelClassName =  \Yii::$app->getModule(Comments\Module::NAME)->model('comment');
+        /** @var Comments\models\Comment $CommentModel */
+        $CommentModel =  \Yii::createObject($CommentModelClassName);
+        $CommentsQuery = $CommentModel::find()
             ->byEntity($this->entity);
 
         if (false === $this->showDeleted) {
@@ -95,8 +99,13 @@ class CommentListWidget extends \yii\base\Widget
     {
         $delete = (int)\Yii::$app->getRequest()->get('delete-comment');
         if ($delete > 0) {
+
+            $CommentModelClassName =  \Yii::$app->getModule(Comments\Module::NAME)->model('comment');
+            /** @var Comments\models\Comment $CommentModel */
+            $CommentModel =  \Yii::createObject($CommentModelClassName);
+
             /** @var Comments\models\Comment $Comment */
-            $Comment = Comments\models\Comment::find()
+            $Comment = $CommentModel::find()
                 ->byId($delete)
                 ->one();
 
@@ -112,7 +121,7 @@ class CommentListWidget extends \yii\base\Widget
                 throw new \yii\web\ForbiddenHttpException(\Yii::t('app', 'Access Denied.'));
             }
 
-            $Comment->deleted = Comments\models\Comment::DELETED;
+            $Comment->deleted = $CommentModel::DELETED;
             $Comment->update();
         }
     }
