@@ -10,7 +10,6 @@ namespace rmrevin\yii\module\Comments;
 use rmrevin\yii\module\Comments\forms\CommentCreateForm;
 use rmrevin\yii\module\Comments\models\Comment;
 use rmrevin\yii\module\Comments\models\queries\CommentQuery;
-
 use yii\helpers\ArrayHelper;
 
 /**
@@ -20,7 +19,8 @@ use yii\helpers\ArrayHelper;
 class Module extends \yii\base\Module
 {
 
-    const NAME = 'comments';
+    /** @var string module name */
+    public static $moduleName = 'comments';
 
     /** @var string|null */
     public $userIdentityClass = null;
@@ -30,7 +30,10 @@ class Module extends \yii\base\Module
 
     /**
      * Array that will store the models used in the package
-     * e.g. : ['Comment' => 'frontend/models/comments/CommentModel'
+     * e.g. :
+     * [
+     *     'Comment' => 'frontend/models/comments/CommentModel'
+     * ]
      *
      * The classes defined here will be merged with getDefaultModels()
      * having he manually defined by the user preference.
@@ -38,13 +41,12 @@ class Module extends \yii\base\Module
      * @var array
      */
     public $modelMap = [];
-    
+
     public function init()
     {
         parent::init();
 
-        if ($this->userIdentityClass === null)
-        {
+        if ($this->userIdentityClass === null) {
             $this->userIdentityClass = \Yii::$app->getUser()->identityClass;
         }
 
@@ -54,10 +56,18 @@ class Module extends \yii\base\Module
     }
 
     /**
+     * @return static
+     */
+    public static function instance()
+    {
+        return \Yii::$app->getModule(static::$moduleName);
+    }
+
+    /**
      * Merges the default and user defined model classes
      * Also let's the developer to set new ones with the
      * parameter being those the ones with most preference.
-     * 
+     *
      * @param array $modelClasses
      */
     public function defineModelClasses($modelClasses = [])
@@ -96,10 +106,8 @@ class Module extends \yii\base\Module
     {
         $modelData = $this->modelMap[ucfirst($name)];
 
-        if (!empty($config))
-        {
-            if (is_string($modelData))
-            {
+        if (!empty($config)) {
+            if (is_string($modelData)) {
                 $modelData = ['class' => $modelData];
             }
 
@@ -107,7 +115,6 @@ class Module extends \yii\base\Module
                 $modelData,
                 $config
             );
-
         }
 
         return $modelData;

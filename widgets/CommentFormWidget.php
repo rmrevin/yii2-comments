@@ -36,13 +36,14 @@ class CommentFormWidget extends \yii\base\Widget
         CommentFormAsset::register($this->getView());
 
         /** @var Comments\forms\CommentCreateForm $CommentCreateForm */
-        $CommentCreateFormClassData =  \Yii::$app->getModule(Comments\Module::NAME)->model(
-            'commentCreateForm',
-            [
+        $CommentCreateFormClassData = Comments\Module::instance()->model(
+            'commentCreateForm', [
                 'Comment' => $this->Comment,
                 'entity' => $this->entity
-            ]);
-        $CommentCreateForm =  \Yii::createObject($CommentCreateFormClassData);
+            ]
+        );
+
+        $CommentCreateForm = \Yii::createObject($CommentCreateFormClassData);
 
         if ($CommentCreateForm->load(\Yii::$app->getRequest()->post())) {
             if ($CommentCreateForm->validate()) {

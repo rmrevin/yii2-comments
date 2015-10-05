@@ -6,6 +6,9 @@
          convertWarningsToExceptions="true"
          stopOnFailure="false">
     <filter>
+        <whitelist>
+            <directory suffix=".php">.</directory>
+        </whitelist>
         <blacklist>
             <directory suffix=".php">./tests</directory>
             <directory suffix=".php">./vendor</directory>

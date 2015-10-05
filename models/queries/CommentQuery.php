@@ -43,9 +43,8 @@ class CommentQuery extends \yii\db\ActiveQuery
      */
     public function withoutDeleted()
     {
-        $CommentModelClassName = \Yii::$app->getModule(Comments\Module::NAME)->model('comment');
         /** @var Comments\models\Comment $CommentModel */
-        $CommentModel = \Yii::createObject($CommentModelClassName);
+        $CommentModel = \Yii::createObject(Comments\Module::instance()->model('comment'));
 
         $this->andWhere(['deleted' => $CommentModel::NOT_DELETED]);
 

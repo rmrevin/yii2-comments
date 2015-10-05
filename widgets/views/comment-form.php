@@ -25,6 +25,11 @@ $Widget = $this->context;
 
         echo Html::activeHiddenInput($CommentCreateForm, 'id');
 
+        if (\Yii::$app->getUser()->getIsGuest()) {
+            echo $form->field($CommentCreateForm, 'from')
+                ->textInput();
+        }
+
         $options = [];
         if ($Widget->Comment->isNewRecord) {
             $options['data-role'] = 'new-comment';
