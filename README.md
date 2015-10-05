@@ -38,6 +38,34 @@ return [
 ];
 ```
 
+In your `User` model (or another model implements the interface `IdentityInterface`) need to implement the interface "\rmrevin\yii\module\Comments\interfaces\CommentatorInterface"
+```php
+class User extends \yii\db\ActiveRecord
+    implements
+        \yii\web\IdentityInterface,
+        \rmrevin\yii\module\Comments\interfaces\CommentatorInterface
+{
+    // ...
+    
+    public function getCommentatorAvatar()
+    {
+        return $this->avatar_url;
+    }
+    
+    public function getCommentatorName()
+    {
+        return $this->name;
+    }
+    
+    public function getCommentatorUrl()
+    {
+        return ['/profile', 'id' => $this->id]; // or false, if user does not have a public page
+    }
+    
+    // ...
+}
+```
+
 In auth manager add rules (if `Module::$useRbac = true`):
 ```php
 <?php
