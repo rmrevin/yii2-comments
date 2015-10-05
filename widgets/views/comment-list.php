@@ -61,7 +61,9 @@ echo yii\widgets\ListView::widget([
                         $name = Yii::t('app', 'Unknown author');
                         $url = false;
 
-                        if ($Author instanceof Comments\interfaces\CommentatorInterface) {
+                        if (empty($Author)) {
+                            $name = empty($Comment->from) ? $name : $Comment->from;
+                        } elseif ($Author instanceof Comments\interfaces\CommentatorInterface) {
                             $avatar = $Author->getCommentatorAvatar();
                             $name = $Author->getCommentatorName();
                             $name = empty($name) ? Yii::t('app', 'Unknown author') : $name;
@@ -127,7 +129,7 @@ echo yii\widgets\ListView::widget([
                             ]);
                             ?>
                         </div>
-                    <?php
+                        <?php
                     }
                     ?>
                     <div class="actions">
@@ -169,16 +171,20 @@ echo yii\widgets\ListView::widget([
         }
 ]);
 
-if ($CommentListWidget->showCreateForm && Comments\models\Comment::canCreate()) {
+/** @var Comments\models\Comment $CommentModel */
+$CommentModel = \Yii::createObject(Comments\Module::instance()->model('comment'));
+
+if ($CommentListWidget->showCreateForm && $CommentModel::canCreate()) {
     echo Html::tag('h3', Yii::t('app', 'Add comment'), ['class' => 'comment-title']);
 
     echo Comments\widgets\CommentFormWidget::widget([
         'theme' => $CommentListWidget->theme,
         'entity' => $CommentListWidget->entity,
-        'Comment' => new Comments\models\Comment(),
+        'Comment' => $CommentModel,
         'anchor' => $CommentListWidget->anchorAfterUpdate,
     ]);
 }
 
-$CommentListWidget->view
+$CommentListWidget
+    ->getView()
     ->registerJs('jQuery("#' . $CommentListWidget->options['id'] . '").yiiCommentsList(' . Json::encode($comments) . ');');

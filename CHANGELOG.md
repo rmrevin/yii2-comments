@@ -1,3 +1,10 @@
+2015-10-05 - 1.4.0
+------------------
+* Improve dependency injection.
+* Add comment from field.
+* Add web test.
+* Refactoring.
+
 2015-06-27 - 1.3.1
 ------------------
 * Add param `theme` to `CommentFormWidget`

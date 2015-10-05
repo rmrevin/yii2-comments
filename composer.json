@@ -31,5 +31,11 @@
     "psr-4": {
       "rmrevin\\yii\\module\\Comments\\": ""
     }
+  },
+  "extra": {
+    "asset-installer-paths": {
+      "npm-asset-library": "vendor/npm",
+      "bower-asset-library": "vendor/bower"
+    }
   }
 }
