@@ -150,7 +150,7 @@ Extending the package
 
 ### Extending Model files
 
-Depending on which ones you need, you can set the `modelClasses` config property:
+Depending on which ones you need, you can set the `modelMap` config property:
 
 ```php
 
@@ -161,7 +161,7 @@ Depending on which ones you need, you can set the `modelClasses` config property
 		    'class' => 'rmrevin\yii\module\Comments\Module',
 		    'userIdentityClass' => 'app\models\User',
 		    'useRbac' => true,
-		    'modelClasses' => [
+		    'modelMap' => [
 		        'Comment' => '@app\comments\CommentModel'
 		    ]
 		]
@@ -169,7 +169,36 @@ Depending on which ones you need, you can set the `modelClasses` config property
 	// ...
 ```
 
+
 Attention: keep in mind that if you are changing the `Comment` model, the new class should always extend the package's original `Comment` class.
+
+
+### Attaching behaviors and event handlers
+ 
+The package allows you to attach behavior or event handler to any model. To do this you can set model map like so:
+
+```php
+
+	// ...
+	'modules' => [
+		// ...
+		'comments' => [
+		    'class' => 'rmrevin\yii\module\Comments\Module',
+		    'userIdentityClass' => 'app\models\User',
+		    'useRbac' => true,
+		    'modelMap' => [
+		        'Comment' => [
+		            'class' => '@app\comments\CommentModel',
+		            'on event' => function(){
+		                // code here
+		            },
+		            'as behavior' => 
+		                ['class' => 'Foo'],
+		    ]
+		]
+	],
+	// ...
+```
 
 ### Extending View files
 
