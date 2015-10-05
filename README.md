@@ -15,7 +15,7 @@ Code Status
 Installation
 ------------
 ```bash
-composer require "rmrevin/yii2-comments:1.2.*"
+composer require "rmrevin/yii2-comments:1.4.*"
 ```
 
 Configuration
