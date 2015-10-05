@@ -10,6 +10,7 @@ namespace rmrevin\yii\module\Comments;
 use rmrevin\yii\module\Comments\forms\CommentCreateForm;
 use rmrevin\yii\module\Comments\models\Comment;
 use rmrevin\yii\module\Comments\models\queries\CommentQuery;
+
 use yii\helpers\ArrayHelper;
 
 /**
@@ -36,7 +37,7 @@ class Module extends \yii\base\Module
      *
      * @var array
      */
-    public $modelClasses = [];
+    public $modelMap = [];
     
     public function init()
     {
@@ -61,9 +62,9 @@ class Module extends \yii\base\Module
      */
     public function defineModelClasses($modelClasses = [])
     {
-        $this->modelClasses = ArrayHelper::merge(
+        $this->modelMap = ArrayHelper::merge(
             $this->getDefaultModels(),
-            $this->modelClasses,
+            $this->modelMap,
             $modelClasses
         );
     }
@@ -81,17 +82,35 @@ class Module extends \yii\base\Module
     }
 
     /**
-     * Get object instance of model
+     * Get defined className of model
+     *
+     * Returns an string or array compatible
+     * with the Yii::createObject method.
      *
      * @param string $name
-     * @param array $config
-     * @return \yii\db\ActiveRecord
+     * @param array $config // You should never send an array with a key defined as "class" since this will
+     *                      // overwrite the main className defined by the system.
+     * @return string|array
      */
     public function model($name, $config = [])
     {
-        // create model and return it
-        $className = $this->modelClasses[ucfirst($name)];
-        return \Yii::createObject(array_merge(["class" => $className], $config));
+        $modelData = $this->modelMap[ucfirst($name)];
+
+        if (!empty($config))
+        {
+            if (is_string($modelData))
+            {
+                $modelData = ['class' => $modelData];
+            }
+
+            $modelData = ArrayHelper::merge(
+                $modelData,
+                $config
+            );
+
+        }
+
+        return $modelData;
     }
 
 }

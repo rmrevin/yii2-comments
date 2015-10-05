@@ -170,8 +170,9 @@ echo yii\widgets\ListView::widget([
 ]);
 
 
+$CommentModelClassName =  \Yii::$app->getModule(Comments\Module::NAME)->model('comment');
 /** @var Comments\models\Comment $CommentModel */
-$CommentModel =  \Yii::$app->getModule(Comments\Module::NAME)->model('comment');
+$CommentModel =  \Yii::createObject($CommentModelClassName);
 
 if ($CommentListWidget->showCreateForm && $CommentModel::canCreate()) {
     echo Html::tag('h3', Yii::t('app', 'Add comment'), ['class' => 'comment-title']);
@@ -179,7 +180,7 @@ if ($CommentListWidget->showCreateForm && $CommentModel::canCreate()) {
     echo Comments\widgets\CommentFormWidget::widget([
         'theme' => $CommentListWidget->theme,
         'entity' => $CommentListWidget->entity,
-        'Comment' => \Yii::$app->getModule(Comments\Module::NAME)->model('comment'),
+        'Comment' => \Yii::createObject($CommentModelClassName),
         'anchor' => $CommentListWidget->anchorAfterUpdate,
     ]);
 }

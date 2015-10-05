@@ -70,8 +70,10 @@ class CommentListWidget extends \yii\base\Widget
 
         $this->processDelete();
 
+
+        $CommentModelClassName =  \Yii::$app->getModule(Comments\Module::NAME)->model('comment');
         /** @var Comments\models\Comment $CommentModel */
-        $CommentModel =  \Yii::$app->getModule(Comments\Module::NAME)->model('comment');
+        $CommentModel =  \Yii::createObject($CommentModelClassName);
         $CommentsQuery = $CommentModel::find()
             ->byEntity($this->entity);
 
@@ -98,8 +100,9 @@ class CommentListWidget extends \yii\base\Widget
         $delete = (int)\Yii::$app->getRequest()->get('delete-comment');
         if ($delete > 0) {
 
+            $CommentModelClassName =  \Yii::$app->getModule(Comments\Module::NAME)->model('comment');
             /** @var Comments\models\Comment $CommentModel */
-            $CommentModel =  \Yii::$app->getModule(Comments\Module::NAME)->model('comment');
+            $CommentModel =  \Yii::createObject($CommentModelClassName);
 
             /** @var Comments\models\Comment $Comment */
             $Comment = $CommentModel::find()
