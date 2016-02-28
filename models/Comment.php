@@ -108,8 +108,8 @@ class Comment extends \yii\db\ActiveRecord
         $User = \Yii::$app->getUser();
 
         return Comments\Module::instance()->useRbac === true
-            ? \Yii::$app->getUser()->can(Comments\Permission::UPDATE) || \Yii::$app->getUser()->can(Comments\Permission::UPDATE_OWN, ['Comment' => $this])
-            : $User->isGuest ? false : $this->created_by === $User->id;
+            ? (\Yii::$app->getUser()->can(Comments\Permission::UPDATE) || \Yii::$app->getUser()->can(Comments\Permission::UPDATE_OWN, ['Comment' => $this]))
+            : ($User->isGuest ? false : ($this->created_by === $User->id));
     }
 
     /**
@@ -120,8 +120,8 @@ class Comment extends \yii\db\ActiveRecord
         $User = \Yii::$app->getUser();
 
         return Comments\Module::instance()->useRbac === true
-            ? \Yii::$app->getUser()->can(Comments\Permission::DELETE) || \Yii::$app->getUser()->can(Comments\Permission::DELETE_OWN, ['Comment' => $this])
-            : $User->isGuest ? false : $this->created_by === $User->id;
+            ? (\Yii::$app->getUser()->can(Comments\Permission::DELETE) || \Yii::$app->getUser()->can(Comments\Permission::DELETE_OWN, ['Comment' => $this]))
+            : ($User->isGuest ? false : ($this->created_by === $User->id));
     }
 
     /**

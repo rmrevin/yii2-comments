@@ -1,3 +1,8 @@
+2016-02-28 - 1.4.1
+------------------
+* Fix author check.
+* Update packages.
+
 2015-10-05 - 1.4.0
 ------------------
 * Improve dependency injection.
