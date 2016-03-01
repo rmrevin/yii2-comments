@@ -28,18 +28,29 @@ class CommentFormWidget extends \yii\base\Widget
     /** @var string */
     public $anchor = '#comment-%d';
 
+    /** @var string */
+    public $viewFile = 'comment-form';
+
+    /**
+     * Register asset bundle
+     */
+    protected function registerAssets()
+    {
+        CommentFormAsset::register($this->getView());
+    }
+
     /**
      * @inheritdoc
      */
     public function run()
     {
-        CommentFormAsset::register($this->getView());
+        $this->registerAssets();
 
         /** @var Comments\forms\CommentCreateForm $CommentCreateForm */
         $CommentCreateFormClassData = Comments\Module::instance()->model(
             'commentCreateForm', [
                 'Comment' => $this->Comment,
-                'entity' => $this->entity
+                'entity' => $this->entity,
             ]
         );
 
@@ -57,7 +68,7 @@ class CommentFormWidget extends \yii\base\Widget
             }
         }
 
-        return $this->render('comment-form', [
+        return $this->render($this->viewFile, [
             'CommentCreateForm' => $CommentCreateForm,
         ]);
     }
@@ -67,10 +78,8 @@ class CommentFormWidget extends \yii\base\Widget
      */
     public function getViewPath()
     {
-        if (empty($this->theme)) {
-            return parent::getViewPath();
-        } else {
-            return \Yii::$app->getViewPath() . DIRECTORY_SEPARATOR . $this->theme;
-        }
+        return empty($this->theme)
+            ? parent::getViewPath()
+            : (\Yii::$app->getViewPath() . DIRECTORY_SEPARATOR . $this->theme);
     }
 }

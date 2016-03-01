@@ -8,6 +8,7 @@
 namespace rmrevin\yii\module\Comments\widgets;
 
 use rmrevin\yii\module\Comments;
+use yii\helpers\Html;
 
 /**
  * Class CommentListWidget
@@ -18,6 +19,9 @@ class CommentListWidget extends \yii\base\Widget
 
     /** @var string|null */
     public $theme;
+
+    /** @var string */
+    public $viewFile = 'comment-list';
 
     /** @var array */
     public $viewParams = [];
@@ -62,11 +66,19 @@ class CommentListWidget extends \yii\base\Widget
     }
 
     /**
+     * Register asset bundle
+     */
+    protected function registerAssets()
+    {
+        CommentListAsset::register($this->getView());
+    }
+
+    /**
      * @inheritdoc
      */
     public function run()
     {
-        CommentListAsset::register($this->getView());
+        $this->registerAssets();
 
         $this->processDelete();
 
@@ -79,7 +91,8 @@ class CommentListWidget extends \yii\base\Widget
             $CommentsQuery->withoutDeleted();
         }
 
-        $CommentsDataProvider = new \yii\data\ActiveDataProvider([
+        $CommentsDataProvider = \Yii::createObject([
+            'class' => \yii\data\ActiveDataProvider::className(),
             'query' => $CommentsQuery->with(['author', 'lastUpdateAuthor']),
             'pagination' => $this->pagination,
             'sort' => $this->sort,
@@ -88,9 +101,9 @@ class CommentListWidget extends \yii\base\Widget
         $params = $this->viewParams;
         $params['CommentsDataProvider'] = $CommentsDataProvider;
 
-        $content = $this->render('comment-list', $params);
+        $content = $this->render($this->viewFile, $params);
 
-        return \yii\helpers\Html::tag('div', $content, $this->options);
+        return Html::tag('div', $content, $this->options);
     }
 
     private function processDelete()
@@ -128,10 +141,8 @@ class CommentListWidget extends \yii\base\Widget
      */
     public function getViewPath()
     {
-        if (empty($this->theme)) {
-            return parent::getViewPath();
-        } else {
-            return \Yii::$app->getViewPath() . DIRECTORY_SEPARATOR . $this->theme;
-        }
+        return empty($this->theme)
+            ? parent::getViewPath()
+            : (\Yii::$app->getViewPath() . DIRECTORY_SEPARATOR . $this->theme);
     }
 }
