@@ -154,9 +154,9 @@ echo yii\widgets\ListView::widget([
                             }
 
                             if ($Comment->canDelete()) {
-                                echo Html::a(
+                                 echo Html::a(
                                     FA::icon('times') . ' ' . Yii::t('app', 'Delete'),
-                                    ['', 'delete-comment' => $Comment->id],
+                                    \yii\helpers\Url::current(['delete-comment' => $Comment->id]),
                                     ['class' => 'btn btn-danger btn-xs']
                                 );
                             }
