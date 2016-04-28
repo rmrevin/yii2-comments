@@ -12,6 +12,8 @@ use rmrevin\yii\fontawesome\FA;
 use rmrevin\yii\module\Comments;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\helpers\Markdown;
+use yii\helpers\Url;
 
 /** @var Comments\widgets\CommentListWidget $CommentListWidget */
 $CommentListWidget = $this->context;
@@ -105,7 +107,7 @@ echo yii\widgets\ListView::widget([
                         if ($Comment->isDeleted()) {
                             echo Yii::t('app', 'Comment was deleted.');
                         } else {
-                            echo yii\helpers\Markdown::process($Comment->text, 'gfm-comment');
+                            echo Markdown::process($Comment->text, 'gfm-comment');
 
                             if ($Comment->isEdited()) {
                                 echo Html::tag('small', Yii::t('app', 'Updated at {date-relative}', [
@@ -156,7 +158,7 @@ echo yii\widgets\ListView::widget([
                             if ($Comment->canDelete()) {
                                  echo Html::a(
                                     FA::icon('times') . ' ' . Yii::t('app', 'Delete'),
-                                    \yii\helpers\Url::current(['delete-comment' => $Comment->id]),
+                                    Url::current(['delete-comment' => $Comment->id]),
                                     ['class' => 'btn btn-danger btn-xs']
                                 );
                             }

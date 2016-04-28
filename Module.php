@@ -7,9 +7,7 @@
 
 namespace rmrevin\yii\module\Comments;
 
-use rmrevin\yii\module\Comments\forms\CommentCreateForm;
-use rmrevin\yii\module\Comments\models\Comment;
-use rmrevin\yii\module\Comments\models\queries\CommentQuery;
+use rmrevin\yii\module\Comments;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -85,9 +83,9 @@ class Module extends \yii\base\Module
     protected function getDefaultModels()
     {
         return [
-            'Comment' => Comment::className(),
-            'CommentQuery' => CommentQuery::className(),
-            'CommentCreateForm' => CommentCreateForm::className()
+            'Comment' => Comments\models\Comment::className(),
+            'CommentQuery' => Comments\models\queries\CommentQuery::className(),
+            'CommentCreateForm' => Comments\forms\CommentCreateForm::className(),
         ];
     }
 
@@ -119,5 +117,4 @@ class Module extends \yii\base\Module
 
         return $modelData;
     }
-
 }

@@ -12,13 +12,16 @@ use rmrevin\yii\module\Comments;
 /**
  * Class CommentQuery
  * @package rmrevin\yii\module\Comments\models\queries
+ *
+ * @method \rmrevin\yii\module\Comments\models\Comment|array|null one($db = null)
+ * @method \rmrevin\yii\module\Comments\models\Comment[]|array all($db = null)
  */
 class CommentQuery extends \yii\db\ActiveQuery
 {
 
     /**
      * @param integer|array $id
-     * @return self
+     * @return static
      */
     public function byId($id)
     {
@@ -29,7 +32,7 @@ class CommentQuery extends \yii\db\ActiveQuery
 
     /**
      * @param string|array $entity
-     * @return self
+     * @return static
      */
     public function byEntity($entity)
     {
@@ -39,7 +42,7 @@ class CommentQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @return self
+     * @return static
      */
     public function withoutDeleted()
     {

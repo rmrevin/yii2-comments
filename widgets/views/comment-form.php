@@ -10,6 +10,7 @@
 
 use rmrevin\yii\module\Comments;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /** @var Comments\widgets\CommentFormWidget $Widget */
 $Widget = $this->context;
@@ -20,8 +21,8 @@ $Widget = $this->context;
 <div class="row comment-form">
     <div class="col-xs-12 col-sm-9 col-md-6 col-lg-4">
         <?php
-        /** @var \yii\widgets\ActiveForm $form */
-        $form = \yii\widgets\ActiveForm::begin();
+        /** @var ActiveForm $form */
+        $form = ActiveForm::begin();
 
         echo Html::activeHiddenInput($CommentCreateForm, 'id');
 
@@ -31,9 +32,11 @@ $Widget = $this->context;
         }
 
         $options = [];
+
         if ($Widget->Comment->isNewRecord) {
             $options['data-role'] = 'new-comment';
         }
+
         echo $form->field($CommentCreateForm, 'text')
             ->textarea($options);
 
@@ -49,7 +52,7 @@ $Widget = $this->context;
             ?>
         </div>
         <?php
-        \yii\widgets\ActiveForm::end();
+        ActiveForm::end();
         ?>
     </div>
 </div>

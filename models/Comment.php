@@ -8,6 +8,8 @@
 namespace rmrevin\yii\module\Comments\models;
 
 use rmrevin\yii\module\Comments;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * Class Comment
@@ -38,8 +40,8 @@ class Comment extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            \yii\behaviors\BlameableBehavior::className(),
-            \yii\behaviors\TimestampBehavior::className(),
+            'blameable' => BlameableBehavior::className(),
+            'timestamp' => TimestampBehavior::className(),
         ];
     }
 
