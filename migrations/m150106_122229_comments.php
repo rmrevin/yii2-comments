@@ -15,7 +15,7 @@ class m150106_122229_comments extends \yii\db\Migration
             'id' => $this->primaryKey(),
             'entity' => $this->string(),
             'text' => $this->text(),
-            'deleted' => $this->boolean()->notNull()->defaultValue(0),
+            'deleted' => $this->boolean()->notNull()->defaultValue(false),
             'created_by' => $this->integer(),
             'updated_by' => $this->integer(),
             'created_at' => $this->integer(),
