@@ -1,3 +1,9 @@
+2016-04-28 - 1.4.4
+------------------
+* Fix #16
+* Fix #13
+* Refactoring
+
 2016-04-28 - 1.4.3
 ------------------
 * Fix trouble with delete button, when user delete comment from page with GET parameters in url (like `foo/bar?id=1`)
